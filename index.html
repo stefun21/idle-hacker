@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyberNet OS v5.0 - Hardcore Idle Hacker</title>
+    <title>CyberNet OS v7.0 - Maximum Security Hack</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -25,7 +25,7 @@
         
         <div class="main-core">
             <div class="terminal-header">
-                <span class="status-dot"></span> MAINFRAME_STATUS: SECURE // ROLE: ROOT_USER
+                <span class="status-dot"></span> MAINFRAME: ENHANCED // CORE_TEMP: <span id="temp-display">0</span>°C
             </div>
 
             <div class="stats-panel">
@@ -34,11 +34,18 @@
                     <span id="balance">0</span> <span class="ticker">BC</span>
                 </div>
                 <div id="cps-display">NET_GENERATION: 0.0 BC/s</div>
+                <div id="cpc-display">CLICK_VALUE: 1.0 BC</div>
             </div>
 
-            <div id="clickBox" class="cyber-server">
-                <div class="glow-ring" id="core-glow"></div>
-                <div class="server-text">EXTRACT DATA PACKETS</div>
+            <div class="core-container">
+                <svg class="heat-svg" viewBox="0 0 100 100">
+                    <circle class="heat-bg-track" cx="50" cy="50" r="45"></circle>
+                    <circle id="heat-bar" cx="50" cy="50" r="45"></circle>
+                </svg>
+                <div id="clickBox" class="cyber-server">
+                    <div class="glow-ring" id="core-glow"></div>
+                    <div class="server-text" id="core-text">EXTRACT DATA PACKETS</div>
+                </div>
             </div>
 
             <div class="prestige-panel">
@@ -52,10 +59,18 @@
 
         <div class="side-modules">
             
-            <div class="module-section">
+            <div class="module-section scrollable">
                 <div class="section-title">// HARDWARE & SOFTWARE MODULES</div>
                 
                 <div class="shop-list">
+                    <div class="upgrade-item special-upgrade" id="upgrade-click">
+                        <div class="item-details">
+                            <h4>Syringe_Injector.click</h4>
+                            <p>+1.0 BC per manual click // Cost: <span id="click-cost">50</span> BC</p>
+                        </div>
+                        <div class="item-count" id="click-count">0</div>
+                    </div>
+
                     <div class="upgrade-item" id="upgrade-bot">
                         <div class="item-details">
                             <h4>Infiltration_Script.sh</h4>
@@ -87,6 +102,14 @@
                         </div>
                         <div class="item-count" id="quantum-count-item">0</div>
                     </div>
+
+                    <div class="upgrade-item" id="upgrade-dyson">
+                        <div class="item-details">
+                            <h4>Dyson_Sphere_Data_Core</h4>
+                            <p>+4200.0 BC/s // Cost: <span id="dyson-cost">950000</span> BC</p>
+                        </div>
+                        <div class="item-count" id="dyson-count">0</div>
+                    </div>
                 </div>
             </div>
 
@@ -95,12 +118,18 @@
                 <div class="achievements-grid">
                     <div class="ach-card locked" id="ach-firstClick" title="Mine 1 ByteCoin manually"><div class="ach-icon">🖱️</div></div>
                     <div class="ach-card locked" id="ach-hundredClicks" title="Click the core 100 times"><div class="ach-icon">⚡</div></div>
+                    <div class="ach-card locked" id="ach-thousandClicks" title="Click the core 1,000 times"><div class="ach-icon">🖲️</div></div>
                     <div class="ach-card locked" id="ach-tenBots" title="Own 10 Infiltration Scripts"><div class="ach-icon">🤖</div></div>
                     <div class="ach-card locked" id="ach-gpuArmy" title="Own 5 Plutonium GPU Rigs"><div class="ach-icon">☢️</div></div>
+                    <div class="ach-card locked" id="ach-clickMaster" title="Own 10 Click Injector Upgrades"><div class="ach-icon">💉</div></div>
+                    <div class="ach-card locked" id="ach-dysonCore" title="Own 1 Dyson Sphere Core"><div class="ach-icon">🌌</div></div>
                     <div class="ach-card locked" id="ach-rich" title="Accumulate 10,000 ByteCoins"><div class="ach-icon">💰</div></div>
+                    <div class="ach-card locked" id="ach-millionaire" title="Accumulate 1,000,000 ByteCoins"><div class="ach-icon">💎</div></div>
                     <div class="ach-card locked" id="ach-anomalyRed" title="Catch a Red Overclock Anomaly"><div class="ach-icon">🔴</div></div>
                     <div class="ach-card locked" id="ach-anomalyBlue" title="Catch a Blue Glitch Anomaly"><div class="ach-icon">🔵</div></div>
                     <div class="ach-card locked" id="ach-anomalyGold" title="Catch a Gold Fortune Anomaly"><div class="ach-icon">🟡</div></div>
+                    <div class="ach-card locked" id="ach-firstOverheat" title="Overheat the core for the first time"><div class="ach-icon">🔥</div></div>
+                    <div class="ach-card locked" id="ach-survival" title="Survive 5 overheat cycles"><div class="ach-icon">🛡️</div></div>
                     <div class="ach-card locked" id="ach-firstPrestige" title="Trigger a Quantum Singularity Reboot"><div class="ach-icon">🌀</div></div>
                 </div>
             </div>
