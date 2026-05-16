@@ -86,7 +86,7 @@ body.flash-gold #fx-overlay { opacity: 1; background: #ffcc00; transition: none;
     100% { transform: translateY(0); opacity: 1; }
 }
 
-/* Master Terminal Framework */
+/* Master Terminal Structure */
 .cyber-terminal {
     position: relative;
     z-index: 2;
@@ -109,7 +109,6 @@ body.flash-gold #fx-overlay { opacity: 1; background: #ffcc00; transition: none;
 
 .terminal-header { font-size: 12px; color: #00aaff; }
 .status-dot { display: inline-block; width: 8px; height: 8px; background: #00ffaa; border-radius: 50%; box-shadow: 0 0 8px #00ffaa; margin-right: 5px; }
-
 body.core-overheated .status-dot { background: #ff0055; box-shadow: 0 0 10px #ff0055; animation: pulse-red-fx 0.2s infinite alternate; }
 
 .stats-panel { text-align: center; background: rgba(0, 255, 170, 0.01); padding: 15px; border: 1px dashed rgba(0, 255, 170, 0.2); }
@@ -119,7 +118,7 @@ body.core-overheated .status-dot { background: #ff0055; box-shadow: 0 0 10px #ff
 #cps-display, #cpc-display { font-size: 14px; color: #00aaff; }
 #cpc-display { color: #ffcc00; font-size: 12px; margin-top: 3px;}
 
-/* SVG Circular Heat Gauge & Core Wrap */
+/* SVG Fluid Gauge Layout */
 .core-container {
     position: relative;
     width: 240px;
@@ -145,12 +144,12 @@ body.core-overheated .status-dot { background: #ff0055; box-shadow: 0 0 10px #ff
     stroke: #ff0055;
     stroke-width: 4;
     stroke-dasharray: 283;
-    stroke-dashoffset: 283; /* 283 is empty, 0 is full circle */
-    transition: stroke-dashoffset 0.1s linear, stroke 0.3s ease;
+    stroke-dashoffset: 283;
+    transition: none; /* Transition removed for manual 60fps frame injection rendering */
     stroke-linecap: round;
 }
 
-/* Central Active Core Node */
+/* Hacking Central Terminal Button */
 .cyber-server {
     width: 190px;
     height: 190px;
@@ -170,11 +169,11 @@ body.core-overheated .status-dot { background: #ff0055; box-shadow: 0 0 10px #ff
 .cyber-server:active { transform: scale(0.95); }
 
 body.core-overheated .cyber-server {
-    background-color: #330011 !important;
+    background-color: #24010d !important;
     border-color: #ff0055 !important;
     border-style: solid;
     cursor: not-allowed;
-    animation: glitch-shaking 0.1s infinite !important;
+    animation: glitch-shaking 0.08s infinite !important;
 }
 
 .glow-ring {
@@ -187,8 +186,7 @@ body.core-overheated .cyber-server {
     border-bottom-color: #00ffaa;
     animation: fast-spin 4s linear infinite;
 }
-
-body.core-overheated .glow-ring { border-top-color: #ff0055; border-bottom-color: #ff0055; animation-duration: 0.5s; }
+body.core-overheated .glow-ring { border-top-color: #ff0055; border-bottom-color: #ff0055; animation-duration: 0.4s; }
 
 .server-text {
     font-size: 13px;
@@ -200,14 +198,13 @@ body.core-overheated .glow-ring { border-top-color: #ff0055; border-bottom-color
     animation: counter-spin 25s linear infinite;
     z-index: 5;
 }
-
-body.core-overheated .server-text { color: #ff0055; text-shadow: 0 0 10px #ff0055; font-weight: 900; }
+body.core-overheated .server-text { color: #ff0055; text-shadow: 0 0 10px #ff0055; }
 
 @keyframes slow-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes fast-spin { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
 @keyframes counter-spin { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
 
-/* Prestige Module layout */
+/* Prestige module framework styling */
 .prestige-panel { background: rgba(0, 170, 255, 0.03); border: 1px solid rgba(0, 170, 255, 0.15); padding: 12px; display: flex; justify-content: space-between; align-items: center; }
 .prestige-title { font-size: 11px; color: #00aaff; }
 .prestige-info { font-size: 13px; color: #fff; }
@@ -215,47 +212,75 @@ body.core-overheated .server-text { color: #ff0055; text-shadow: 0 0 10px #ff005
 #prestigeBtn.locked { background: #12181a; color: #3b494c; cursor: not-allowed; border: 1px solid #1f2729; }
 #prestigeBtn:not(.locked):hover { background: #00e1ff; box-shadow: 0 0 12px #00aaff; }
 
-/* Right Column Upgrades Shop */
+/* Upgrades store styles */
 .side-modules { flex: 1.1; padding: 25px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
 .module-section { margin-bottom: 12px; }
 .module-section.scrollable { flex: 1; overflow-y: auto; max-height: 290px; padding-right: 5px; margin-bottom: 15px;}
 
-/* Custom Scrollbar for Shop Modules list */
 .module-section.scrollable::-webkit-scrollbar { width: 4px; }
 .module-section.scrollable::-webkit-scrollbar-track { background: transparent; }
 .module-section.scrollable::-webkit-scrollbar-thumb { background: #00ffaa; border-radius: 2px; }
 
-.section-title { font-size: 11px; color: #444; margin-bottom: 6px; letter-spacing: 1px; }
-.shop-list { display: flex; flex-direction: column; gap: 6px; }
+.section-header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.section-title { font-size: 11px; color: #444; letter-spacing: 1px; }
 
+/* Dynamic Grayed Out State rules */
 .upgrade-item {
-    background: rgba(255, 255, 255, 0.01);
-    border: 1px solid rgba(0, 255, 170, 0.12);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(0, 255, 170, 0.2);
     padding: 8px 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: background 0.2s, border-color 0.2s, opacity 0.2s;
 }
-.upgrade-item:hover { background: rgba(0, 255, 170, 0.05); border-color: #00ffaa; }
+.upgrade-item.disabled {
+    opacity: 0.3 !important;
+    background: rgba(255, 255, 255, 0.005) !important;
+    border-color: rgba(255, 255, 255, 0.05) !important;
+    cursor: not-allowed;
+}
+.upgrade-item.disabled h4 { color: #666 !important; }
+.upgrade-item.disabled .item-count { color: rgba(255, 255, 255, 0.03) !important; }
+
+.upgrade-item:not(.disabled):hover { background: rgba(0, 255, 170, 0.05); border-color: #00ffaa; }
 .special-upgrade { border-color: rgba(255, 204, 0, 0.25); }
-.special-upgrade:hover { border-color: #ffcc00; background: rgba(255, 204, 0, 0.05); }
-.special-upgrade h4 { color: #ffcc00 !important; }
+.special-upgrade:not(.disabled):hover { border-color: #ffcc00; background: rgba(255, 204, 0, 0.05); }
+.special-upgrade h4 { color: #ffcc00; }
 
 .upgrade-item h4 { font-size: 13px; color: #fff; }
 .upgrade-item p { font-size: 11px; color: #666; }
 .item-count { font-size: 20px; color: rgba(0, 255, 170, 0.12); font-weight: bold; }
-.upgrade-item:hover .item-count { color: #00ffaa; }
-.special-upgrade:hover .item-count { color: #ffcc00; }
+.upgrade-item:not(.disabled):hover .item-count { color: #00ffaa; }
+.special-upgrade:not(.disabled):hover .item-count { color: #ffcc00; }
 
-/* Grid of mini accomplishments */
+/* Grid of tiny achievements */
 .achievements-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; }
-.ach-card { background: #030608; border: 1px solid rgba(0, 255, 170, 0.15); padding: 8px 5px; text-align: center; border-radius: 2px; }
+.ach-card { background: #030608; border: 1px solid rgba(0, 255, 170, 0.15); padding: 8px 5px; text-align: center; border-radius: 2px; position: relative; }
 .ach-card.locked { opacity: 0.12; filter: grayscale(1); border-color: #1a1a1a; }
+.ach-card.mastered { border-color: #ffcc00 !important; box-shadow: inset 0 0 5px rgba(255,204,0,0.3); }
 .ach-icon { font-size: 16px; }
 
-/* Numeric Floating Particle Animations */
+/* Mastery Button Node UI */
+#masteryBtn {
+    background: transparent;
+    border: 1px solid #ffcc00;
+    color: #ffcc00;
+    padding: 3px 8px;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    text-shadow: 0 0 5px #ffcc00;
+    box-shadow: 0 0 8px rgba(255, 204, 0, 0.2);
+    animation: flash-border 1s infinite alternate;
+}
+#masteryBtn:hover { background: #ffcc00; color: #000; }
+#masteryBtn.hidden { display: none; }
+
+@keyframes flash-border { from { border-color: #ffcc00; } to { border-color: #fff; } }
+
+/* Float Numbers setup */
 .floating-number {
     position: absolute;
     pointer-events: none;
@@ -274,22 +299,9 @@ body.core-overheated .server-text { color: #ff0055; text-shadow: 0 0 10px #ff005
     100% { transform: translateY(-100px) scale(0.6); opacity: 0; }
 }
 
-/* The Anomaly Core node object drops */
-#anomaly-node {
-    position: fixed;
-    width: 46px;
-    height: 46px;
-    border: 3px solid #fff;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 1000;
-    animation: pulse-node-glow 0.4s infinite alternate;
-}
+#anomaly-node { position: fixed; width: 46px; height: 46px; border: 3px solid #fff; border-radius: 50%; cursor: pointer; z-index: 1000; animation: pulse-node-glow 0.4s infinite alternate; }
 #anomaly-node.hidden { display: none; }
-@keyframes pulse-node-glow {
-    from { transform: scale(0.9); }
-    to { transform: scale(1.1); box-shadow: 0 0 30px inherit, 0 0 10px #fff; }
-}
+@keyframes pulse-node-glow { from { transform: scale(0.9); } to { transform: scale(1.1); box-shadow: 0 0 30px inherit, 0 0 10px #fff; } }
 
 #resetBtn { background: transparent; border: 1px solid #ff0055; color: #ff0055; padding: 6px; cursor: pointer; font-size: 11px; margin-top: 5px; }
 #resetBtn:hover { background: #ff0055; color: #fff; }
