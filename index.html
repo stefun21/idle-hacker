@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyberNet OS v7.0 - Maximum Security Hack</title>
+    <title>CyberNet OS v9.0 - Mastery Protocol</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -25,7 +25,7 @@
         
         <div class="main-core">
             <div class="terminal-header">
-                <span class="status-dot"></span> MAINFRAME: ENHANCED // CORE_TEMP: <span id="temp-display">0</span>°C
+                <span class="status-dot"></span> MAINFRAME: MASTERY_OS // CORE_TEMP: <span id="temp-display">0</span>°C
             </div>
 
             <div class="stats-panel">
@@ -63,7 +63,7 @@
                 <div class="section-title">// HARDWARE & SOFTWARE MODULES</div>
                 
                 <div class="shop-list">
-                    <div class="upgrade-item special-upgrade" id="upgrade-click">
+                    <div class="upgrade-item special-upgrade disabled" id="upgrade-click">
                         <div class="item-details">
                             <h4>Syringe_Injector.click</h4>
                             <p>+1.0 BC per manual click // Cost: <span id="click-cost">50</span> BC</p>
@@ -71,7 +71,7 @@
                         <div class="item-count" id="click-count">0</div>
                     </div>
 
-                    <div class="upgrade-item" id="upgrade-bot">
+                    <div class="upgrade-item disabled" id="upgrade-bot">
                         <div class="item-details">
                             <h4>Infiltration_Script.sh</h4>
                             <p>+0.2 BC/s // Cost: <span id="bot-cost">20</span> BC</p>
@@ -79,7 +79,7 @@
                         <div class="item-count" id="bot-count">0</div>
                     </div>
 
-                    <div class="upgrade-item" id="upgrade-gpu">
+                    <div class="upgrade-item disabled" id="upgrade-gpu">
                         <div class="item-details">
                             <h4>Plutonium_GPU_Rig.dat</h4>
                             <p>+3.5 BC/s // Cost: <span id="gpu-cost">250</span> BC</p>
@@ -87,7 +87,7 @@
                         <div class="item-count" id="gpu-count">0</div>
                     </div>
 
-                    <div class="upgrade-item" id="upgrade-mainframe">
+                    <div class="upgrade-item disabled" id="upgrade-mainframe">
                         <div class="item-details">
                             <h4>Orbital_Mainframe_Hijack</h4>
                             <p>+40.0 BC/s // Cost: <span id="mainframe-cost">3200</span> BC</p>
@@ -95,7 +95,7 @@
                         <div class="item-count" id="mainframe-count">0</div>
                     </div>
 
-                    <div class="upgrade-item" id="upgrade-quantum">
+                    <div class="upgrade-item disabled" id="upgrade-quantum">
                         <div class="item-details">
                             <h4>AI_Darknet_Hivemind.net</h4>
                             <p>+350.0 BC/s // Cost: <span id="quantum-cost">45000</span> BC</p>
@@ -103,7 +103,7 @@
                         <div class="item-count" id="quantum-count-item">0</div>
                     </div>
 
-                    <div class="upgrade-item" id="upgrade-dyson">
+                    <div class="upgrade-item disabled" id="upgrade-dyson">
                         <div class="item-details">
                             <h4>Dyson_Sphere_Data_Core</h4>
                             <p>+4200.0 BC/s // Cost: <span id="dyson-cost">950000</span> BC</p>
@@ -114,23 +114,26 @@
             </div>
 
             <div class="module-section">
-                <div class="section-title">// DECRYPTED ACHIEVEMENTS INDEX</div>
+                <div class="section-header-flex">
+                    <div class="section-title" id="ach-section-title">// DECRYPTED ACHIEVEMENTS INDEX (Lvl 1)</div>
+                    <button id="masteryBtn" class="hidden">ACTIVATE MASTERY RESET (+5 ALL LVLS)</button>
+                </div>
                 <div class="achievements-grid">
-                    <div class="ach-card locked" id="ach-firstClick" title="Mine 1 ByteCoin manually"><div class="ach-icon">🖱️</div></div>
-                    <div class="ach-card locked" id="ach-hundredClicks" title="Click the core 100 times"><div class="ach-icon">⚡</div></div>
-                    <div class="ach-card locked" id="ach-thousandClicks" title="Click the core 1,000 times"><div class="ach-icon">🖲️</div></div>
-                    <div class="ach-card locked" id="ach-tenBots" title="Own 10 Infiltration Scripts"><div class="ach-icon">🤖</div></div>
-                    <div class="ach-card locked" id="ach-gpuArmy" title="Own 5 Plutonium GPU Rigs"><div class="ach-icon">☢️</div></div>
-                    <div class="ach-card locked" id="ach-clickMaster" title="Own 10 Click Injector Upgrades"><div class="ach-icon">💉</div></div>
-                    <div class="ach-card locked" id="ach-dysonCore" title="Own 1 Dyson Sphere Core"><div class="ach-icon">🌌</div></div>
-                    <div class="ach-card locked" id="ach-rich" title="Accumulate 10,000 ByteCoins"><div class="ach-icon">💰</div></div>
-                    <div class="ach-card locked" id="ach-millionaire" title="Accumulate 1,000,000 ByteCoins"><div class="ach-icon">💎</div></div>
-                    <div class="ach-card locked" id="ach-anomalyRed" title="Catch a Red Overclock Anomaly"><div class="ach-icon">🔴</div></div>
-                    <div class="ach-card locked" id="ach-anomalyBlue" title="Catch a Blue Glitch Anomaly"><div class="ach-icon">🔵</div></div>
-                    <div class="ach-card locked" id="ach-anomalyGold" title="Catch a Gold Fortune Anomaly"><div class="ach-icon">🟡</div></div>
-                    <div class="ach-card locked" id="ach-firstOverheat" title="Overheat the core for the first time"><div class="ach-icon">🔥</div></div>
-                    <div class="ach-card locked" id="ach-survival" title="Survive 5 overheat cycles"><div class="ach-icon">🛡️</div></div>
-                    <div class="ach-card locked" id="ach-firstPrestige" title="Trigger a Quantum Singularity Reboot"><div class="ach-icon">🌀</div></div>
+                    <div class="ach-card locked" id="ach-firstClick" title="Mine data pack manually"><div class="ach-icon">🖱️</div></div>
+                    <div class="ach-card locked" id="ach-hundredClicks" title="Click core many times"><div class="ach-icon">⚡</div></div>
+                    <div class="ach-card locked" id="ach-thousandClicks" title="Deep data manual logging"><div class="ach-icon">🖲️</div></div>
+                    <div class="ach-card locked" id="ach-tenBots" title="Deploy software scripts"><div class="ach-icon">🤖</div></div>
+                    <div class="ach-card locked" id="ach-gpuArmy" title="Build plutonium hash rigs"><div class="ach-icon">☢️</div></div>
+                    <div class="ach-card locked" id="ach-clickMaster" title="Upgrade click tool structure"><div class="ach-icon">💉</div></div>
+                    <div class="ach-card locked" id="ach-dysonCore" title="Hijack Dyson clusters"><div class="ach-icon">🌌</div></div>
+                    <div class="ach-card locked" id="ach-rich" title="Store high crypto reserves"><div class="ach-icon">💰</div></div>
+                    <div class="ach-card locked" id="ach-millionaire" title="Achieve massive ledger capital"><div class="ach-icon">💎</div></div>
+                    <div class="ach-card locked" id="ach-anomalyRed" title="Stabilize Red Anomaly"><div class="ach-icon">🔴</div></div>
+                    <div class="ach-card locked" id="ach-anomalyBlue" title="Stabilize Blue Anomaly"><div class="ach-icon">🔵</div></div>
+                    <div class="ach-card locked" id="ach-anomalyGold" title="Stabilize Gold Anomaly"><div class="ach-icon">🟡</div></div>
+                    <div class="ach-card locked" id="ach-firstOverheat" title="Trigger a thermal emergency"><div class="ach-icon">🔥</div></div>
+                    <div class="ach-card locked" id="ach-survival" title="Survive consecutive server crashes"><div class="ach-icon">🛡️</div></div>
+                    <div class="ach-card locked" id="ach-firstPrestige" title="Collapse local space timeline"><div class="ach-icon">🌀</div></div>
                 </div>
             </div>
 
