@@ -10,7 +10,7 @@ let game = {
     heat: 0,
     isOverheated: false,
     overheatCycles: 0,
-    masteryLevel: 1, // Mastery level state tracker
+    masteryLevel: 1, 
     upgrades: {
         click: { count: 0, cost: 50, income: 1.0 },
         bot: { count: 0, cost: 20, income: 0.2 },
@@ -83,7 +83,6 @@ function updateUI() {
     let spinSpeed = currentCps > 0 ? Math.max(0.4, 6 - (currentCps / 60)) : 4;
     coreGlow.style.animationDuration = `${spinSpeed}s`;
 
-    // Shop Upgrade rendering with disabled classes injection loop
     for (let key in game.upgrades) {
         let itemUI = document.getElementById(`upgrade-${key}`);
         let costUI = document.getElementById(`${key}-cost`);
@@ -114,7 +113,6 @@ function updateUI() {
         prestigeBtn.textContent = `REBOOT CORE FOR +0 CHIPS`;
     }
 
-    // Render achievements status grid
     let totalUnlocked = 0;
     for (let achKey in game.achievements) {
         let card = document.getElementById(`ach-${achKey}`);
@@ -132,7 +130,6 @@ function updateUI() {
 
     achSectionTitle.textContent = `// DECRYPTED ACHIEVEMENTS INDEX (Lvl ${game.masteryLevel})`;
 
-    // Check if player has unlocked everything to show Mastery reset node button
     if (totalUnlocked === 15) {
         masteryBtn.classList.remove("hidden");
     } else {
@@ -160,8 +157,8 @@ function fluidCoolingLoop(timestamp) {
     lastFrameTime = timestamp;
 
     if (game.isOverheated) {
-        // Fast cooling when broken: returns from 100 to 0 in exactly 4 seconds
-        game.heat -= 25 * deltaTime; 
+        // Răcire ULTRA-RAPIDĂ în starea de blocare (revine la 0 în 1.5 secunde)
+        game.heat -= 66.6 * deltaTime; 
         if (game.heat <= 0) {
             game.heat = 0;
             game.isOverheated = false;
@@ -171,8 +168,8 @@ function fluidCoolingLoop(timestamp) {
         }
         updateHeatGauge();
     } else if (game.heat > 0) {
-        // Passive slight runtime dissipation leakage values
-        game.heat -= 6 * deltaTime;
+        // UNIFICARE VITEZĂ: Căldura scade la fel de rapid (-66.6% pe secundă) și în timpul funcționării normale!
+        game.heat -= 66.6 * deltaTime;
         if (game.heat < 0) game.heat = 0;
         updateHeatGauge();
     }
@@ -181,9 +178,8 @@ function fluidCoolingLoop(timestamp) {
 }
 requestAnimationFrame(fluidCoolingLoop);
 
-// Scaling conditions evaluation dynamic system
 function checkAchievementConditions() {
-    let scalar = game.masteryLevel; // 1x, 2x, 3x target requirements multipliers
+    let scalar = game.masteryLevel; 
 
     if (game.totalClicks >= 1) triggerAchievement("firstClick");
     if (game.totalClicks >= 100 * scalar) triggerAchievement("hundredClicks");
@@ -226,12 +222,11 @@ function createFloatingNumber(x, y, text, type) {
     setTimeout(() => el.remove(), 550);
 }
 
-// User Core Access Node
 clickBox.addEventListener("click", (e) => {
     if (game.isOverheated) return;
 
-    // Heat increment setup
-    game.heat += 2.5;
+    // Adaugă doar +0.8% pe click (permite peste 125 de click-uri rapide înainte de Max Heat!)
+    game.heat += 0.8;
     if (game.heat >= 100) {
         game.heat = 100;
         game.isOverheated = true;
@@ -272,7 +267,6 @@ clickBox.addEventListener("click", (e) => {
     updateUI();
 });
 
-// Shop transactional logic execution block
 function buyUpgrade(type) {
     const up = game.upgrades[type];
     if (game.coins >= up.cost) {
@@ -316,11 +310,10 @@ prestigeBtn.addEventListener("click", () => {
         
         game.coins = 0;
         game.cps = 0;
-        game.clickValue = 1.0 + (game.upgrades.click.count * game.upgrades.click.income); // Preserve base levels counts value outputs
+        game.clickValue = 1.0 + (game.upgrades.click.count * game.upgrades.click.income); 
         game.heat = 0;
         game.isOverheated = false;
         
-        // Reset base costs profiles dynamically
         recalculateCostsAndIncomes();
         
         triggerAchievement("firstPrestige");
@@ -331,9 +324,6 @@ prestigeBtn.addEventListener("click", () => {
 });
 
 function recalculateCostsAndIncomes() {
-    // Reset costs from counts structures if completely hard rebooted
-    // Here we preserve counts because prestige doesn't wipe items in cookie stacks if desired, 
-    // but standard idle games wipe items on prestige. We follow standard reset protocols:
     game.upgrades.click.cost = Math.floor(50 * Math.pow(1.22, game.upgrades.click.count));
     game.upgrades.bot.cost = Math.floor(20 * Math.pow(1.22, game.upgrades.bot.count));
     game.upgrades.gpu.cost = Math.floor(250 * Math.pow(1.22, game.upgrades.gpu.count));
@@ -342,27 +332,21 @@ function recalculateCostsAndIncomes() {
     game.upgrades.dyson.cost = Math.floor(950000 * Math.pow(1.22, game.upgrades.dyson.count));
 }
 
-// MASTERY ACHIEVEMENTS PRESTIGE ENGINE SYSTEM
 masteryBtn.addEventListener("click", () => {
-    // Increment mastery level scalar targets limits
     game.masteryLevel++;
     
-    // Reset all achievements records to false state tracking flags
     for (let achKey in game.achievements) {
         game.achievements[achKey] = false;
     }
 
-    // GIFT REWARD: Grant +5 instant bonus item levels to every single shop element array
     for (let key in game.upgrades) {
         game.upgrades[key].count += 5;
     }
 
-    // Recalculate immediate system capabilities modifications outputs
     game.clickValue += (5 * game.upgrades.click.income);
     recalculateCostsAndIncomes();
     recalculateCPS();
     
-    // Dramatic gold screen feedback
     document.body.className = "flash-gold";
     setTimeout(() => document.body.className = "", 300);
 
@@ -370,12 +354,10 @@ masteryBtn.addEventListener("click", () => {
     saveGame();
 });
 
-// Random Drop Anomalies Logic setup
 let currentAnomalyType = 'red';
 function spawnAnomaly() {
     if (game.activeBoost || game.isOverheated) return;
 
-    const types = ['red', 'blue', 'gold'];
     let rand = Math.random();
     if (rand < 0.45) currentAnomalyType = 'red';
     else if (rand < 0.85) currentAnomalyType = 'blue';
@@ -427,7 +409,6 @@ function endBoost() {
 
 setInterval(spawnAnomaly, 38000);
 
-// Automation ticks engine runner execution logic
 setInterval(() => {
     let output = game.cps * game.prestigeMult * game.boostMultiplier;
     game.coins += output;
@@ -442,6 +423,5 @@ document.getElementById("resetBtn").addEventListener("click", () => {
     }
 });
 
-// Bootloader
 recalculateCPS();
 updateUI();
