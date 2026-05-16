@@ -4,6 +4,8 @@ const ctx = canvas.getContext('2d');
 function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    
+    // Forțăm fundal negru la resize
     ctx.fillStyle = '#000000';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
@@ -16,36 +18,25 @@ let isDrawing = false;
 // Elemente din Panoul de Control
 const sizeSlider = document.getElementById('sizeSlider');
 const speedSlider = document.getElementById('speedSlider');
-const colorPicker = document.getElementById('colorPicker');
 const trailSlider = document.getElementById('trailSlider');
+const clearBtn = document.getElementById('clearBtn');
+
+// Adunăm toate color pickers într-un array
+const colorPickers = [
+    document.getElementById('colorPicker1'),
+    document.getElementById('colorPicker2'),
+    document.getElementById('colorPicker3'),
+    document.getElementById('colorPicker4'),
+    document.getElementById('colorPicker5')
+];
 
 const mouse = { x: undefined, y: undefined };
 
-// Funcție ajutătoare pentru a converti HEX în HSL (pentru nuanțe neon)
-function hexToHSL(hex) {
-    let r = parseInt(hex.slice(1, 3), 16) / 255;
-    let g = parseInt(hex.slice(3, 5), 16) / 255;
-    let b = parseInt(hex.slice(5, 7), 16) / 255;
-    let max = Math.max(r, g, b), min = Math.min(r, g, b);
-    let h, s, l = (max + min) / 2;
-    if (max == min) { h = s = 0; } 
-    else {
-        let d = max - min;
-        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-        switch (max) {
-            case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-            case g: h = (b - r) / d + 2; break;
-            case b: h = (r - g) / d + 4; break;
-        }
-        h /= 6;
-    }
-    return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) };
-}
-
-// Detecție Click
+// Detecție Evenimente Mouse (Desenare la click)
 window.addEventListener('mousedown', (e) => {
-    // Să nu deseneze dacă dăm click pe panoul de control
+    // Verificăm dacă nu dăm click pe panoul de control
     if (e.target.closest('.controls')) return; 
+    
     isDrawing = true;
     updateMousePos(e);
     generateParticles();
@@ -64,48 +55,72 @@ function updateMousePos(e) {
     mouse.y = e.clientY;
 }
 
+// Obține lista de culori active (cele care nu sunt negre)
+function getActiveColors() {
+    const activeColors = [];
+    colorPickers.forEach(picker => {
+        const color = picker.value;
+        // Ignorăm negrul complet (#000000)
+        if (color !== '#000000') {
+            activeColors.push(color);
+        }
+    });
+    
+    // Fallback în caz că toate sunt negre
+    if (activeColors.length === 0) return ['#00ffcc'];
+    return activeColors;
+}
+
 function generateParticles() {
     const maxSpeed = parseFloat(speedSlider.value);
     const baseSize = parseFloat(sizeSlider.value);
-    const hsl = hexToHSL(colorPicker.value);
+    const activeColors = getActiveColors();
 
-    // Generăm 4 particule la fiecare mișcare cu click apasat
+    // Generăm 4 particule la fiecare mișcare
     for (let i = 0; i < 4; i++) {
-        particlesArray.push(new Particle(baseSize, maxSpeed, hsl));
+        // Alegem o culoare aleatorie din cele active
+        const randomColor = activeColors[Math.floor(Math.random() * activeColors.length)];
+        particlesArray.push(new Particle(baseSize, maxSpeed, randomColor));
     }
 }
 
 class Particle {
-    constructor(baseSize, maxSpeed, hsl) {
+    constructor(baseSize, maxSpeed, color) {
         this.x = mouse.x;
         this.y = mouse.y;
-        this.size = Math.random() * baseSize + 1;
         
-        // Direcție și viteză bazate pe slider
+        // Variație de mărime organică
+        this.size = Math.random() * baseSize + (baseSize / 2);
+        
+        // Viteză și împrăștiere bazate pe slider
         this.speedX = Math.random() * maxSpeed - (maxSpeed / 2);
         this.speedY = Math.random() * maxSpeed - (maxSpeed / 2);
         
-        // Adăugăm o ușoară variație de nuanță în jurul culorii alese pentru efect organic
-        const hVariation = hsl.h + Math.floor(Math.random() * 30 - 15);
-        this.color = `hsl(${hVariation}, ${hsl.s}%, ${hsl.l}%)`;
+        this.color = color;
     }
 
     update() {
         this.x += this.speedX;
         this.y += this.speedY;
-        if (this.size > 0.1) this.size -= 0.05;
+        
+        // Micșorăm particula în timp
+        if (this.size > 0.1) this.size -= 0.08;
     }
 
     draw() {
         ctx.fillStyle = this.color;
         ctx.beginPath();
+        // Desenăm cercuri perfecte
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
     }
 }
 
 function animate() {
-    // Controlăm intensitatea cozii. Valoare mai mică = coadă mai lungă.
+    // Problemă rezolvată: Forțăm fundal negru. 
+    // Coada (Trail) este determinată de opacitatea culorii negre desenate peste.
+    // Slider valoare mică (0) = fără coadă, șterge instant.
+    // Slider valoare mare (10) = coadă lungă.
     const trailOpacity = (11 - trailSlider.value) * 0.05; 
     ctx.fillStyle = `rgba(0, 0, 0, ${trailOpacity})`;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -114,6 +129,7 @@ function animate() {
         particlesArray[i].update();
         particlesArray[i].draw();
         
+        // Dacă particula e invizibilă, o ștergem
         if (particlesArray[i].size <= 0.1) {
             particlesArray.splice(i, 1);
             i--;
@@ -122,10 +138,10 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-// Pornim animația
 animate();
 
-document.getElementById('clearBtn').addEventListener('click', () => {
+// Butonul de ștergere instant
+clearBtn.addEventListener('click', () => {
     particlesArray.length = 0;
     ctx.fillStyle = '#000000';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
