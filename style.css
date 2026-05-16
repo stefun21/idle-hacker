@@ -8,7 +8,7 @@ body, html {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background-color: #000000; /* Negru complet fixat */
+    background-color: #000000; /* Forțăm fundal negru */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -25,26 +25,27 @@ canvas {
     top: 20px;
     left: 20px;
     z-index: 10;
-    background: rgba(10, 10, 10, 0.85);
+    background: rgba(10, 10, 10, 0.9); /* Mai opac ca să fie vizibil */
     backdrop-filter: blur(5px);
     padding: 20px;
     border: 1px solid #333;
-    border-radius: 8px;
+    border-radius: 12px;
     color: #fff;
-    width: 260px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    width: 280px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.7);
 }
 
 h3 {
     margin-bottom: 5px;
-    font-size: 16px;
+    font-size: 18px;
     letter-spacing: 1px;
     color: #00ffcc;
+    text-align: center;
 }
 
 hr {
     border: 0;
-    border-top: 1px solid #333;
+    border-top: 1px solid #444;
     margin-bottom: 15px;
 }
 
@@ -52,17 +53,19 @@ p {
     font-size: 12px;
     color: #aaa;
     margin-bottom: 15px;
+    text-align: center;
 }
 
 .control-group {
-    margin-bottom: 15px;
+    margin-bottom: 18px;
 }
 
 label {
     display: block;
-    font-size: 12px;
-    margin-bottom: 5px;
+    font-size: 13px;
+    margin-bottom: 8px;
     color: #ddd;
+    font-weight: bold;
 }
 
 input[type="range"] {
@@ -71,28 +74,53 @@ input[type="range"] {
     cursor: pointer;
 }
 
+.colors-inputs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
 input[type="color"] {
-    width: 100%;
-    height: 30px;
-    border: none;
-    border-radius: 4px;
+    flex: 1;
+    height: 35px;
+    border: 2px solid #333;
+    border-radius: 6px;
     background: transparent;
     cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+input[type="color"]:hover {
+    border-color: #00ffcc;
+}
+
+.color-note {
+    font-size: 10px;
+    color: #777;
+    margin-top: -5px;
+    margin-bottom: 0;
+    text-align: left;
 }
 
 button {
     width: 100%;
     margin-top: 10px;
-    background: #00ffcc;
+    background: #ff0055; /* Buton roșu de ștergere */
     border: none;
-    color: #000;
-    padding: 10px;
+    color: #fff;
+    padding: 12px;
     font-weight: bold;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.1s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 button:hover {
-    background: #00b399;
+    background: #ff3377;
+}
+
+button:active {
+    transform: scale(0.98);
 }
