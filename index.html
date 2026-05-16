@@ -1,24 +1,35 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyberNet v3.0 - Idle Hacker Simulator</title>
+    <title>CyberNet OS v5.0 - Hardcore Idle Hacker</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div id="boost-overlay"></div>
+    <div id="fx-overlay"></div>
+
+    <div id="ach-notification" class="hidden">
+        <div class="ach-pop-header">SYSTEM ALERT: ACHIEVEMENT UNLOCKED</div>
+        <div class="ach-pop-body">
+            <span id="ach-pop-icon">🏆</span>
+            <div>
+                <h4 id="ach-pop-title">Achievement Name</h4>
+                <p id="ach-pop-desc">Achievement description goes here.</p>
+            </div>
+        </div>
+    </div>
 
     <div class="cyber-terminal">
         
         <div class="main-core">
             <div class="terminal-header">
-                <span class="status-dot"></span> SYSTEM_STATUS: ACTIVE // USER: ANONYMOUS
+                <span class="status-dot"></span> MAINFRAME_STATUS: SECURE // ROLE: ROOT_USER
             </div>
 
             <div class="stats-panel">
-                <div class="crypto-title">SISTEM DE LOGARE BYTECOINS</div>
+                <div class="crypto-title">MINED DATA ENCRYPTION LOG</div>
                 <div class="balance-box">
                     <span id="balance">0</span> <span class="ticker">BC</span>
                 </div>
@@ -26,75 +37,75 @@
             </div>
 
             <div id="clickBox" class="cyber-server">
-                <div class="glow-ring"></div>
-                <div class="core-lines"></div>
-                <div class="server-text">ACCESEAZĂ NODUL CENTRAL</div>
+                <div class="glow-ring" id="core-glow"></div>
+                <div class="server-text">EXTRACT DATA PACKETS</div>
             </div>
 
             <div class="prestige-panel">
                 <div>
-                    <div class="prestige-title">MATRICE CUANTICĂ (PRESTIGIU)</div>
-                    <div class="prestige-info">Cipuri Quantice deținute: <span id="quantum-count">0</span> (<span id="prestige-multiplier">1.0</span>x Multiplicator)</div>
+                    <div class="prestige-title">QUANTUM SINGULARITY (PRESTIGE)</div>
+                    <div class="prestige-info">Quantum Chips: <span id="quantum-count">0</span> (<span id="prestige-multiplier">1.0</span>x Boost)</div>
                 </div>
-                <button id="prestigeBtn" class="locked">REPORNEȘTE PENTRU +0 CIPURI</button>
+                <button id="prestigeBtn" class="locked">REBOOT CORE FOR +0 CHIPS</button>
             </div>
         </div>
 
         <div class="side-modules">
             
             <div class="module-section">
-                <div class="section-title">// MODULE DE UPGRADE</div>
+                <div class="section-title">// HARDWARE & SOFTWARE MODULES</div>
                 
                 <div class="shop-list">
                     <div class="upgrade-item" id="upgrade-bot">
                         <div class="item-details">
-                            <h4>Script_Infiltrare.exe</h4>
-                            <p>+1 BC/s // Cost: <span id="bot-cost">15</span> BC</p>
+                            <h4>Infiltration_Script.sh</h4>
+                            <p>+0.2 BC/s // Cost: <span id="bot-cost">20</span> BC</p>
                         </div>
                         <div class="item-count" id="bot-count">0</div>
                     </div>
 
                     <div class="upgrade-item" id="upgrade-gpu">
                         <div class="item-details">
-                            <h4>Rig_Minare_Plutoniu.dat</h4>
-                            <p>+12 BC/s // Cost: <span id="gpu-cost">100</span> BC</p>
+                            <h4>Plutonium_GPU_Rig.dat</h4>
+                            <p>+3.5 BC/s // Cost: <span id="gpu-cost">250</span> BC</p>
                         </div>
                         <div class="item-count" id="gpu-count">0</div>
                     </div>
 
                     <div class="upgrade-item" id="upgrade-mainframe">
                         <div class="item-details">
-                            <h4>Mainframe_Satelit_Militar</h4>
-                            <p>+95 BC/s // Cost: <span id="mainframe-cost">1100</span> BC</p>
+                            <h4>Orbital_Mainframe_Hijack</h4>
+                            <p>+40.0 BC/s // Cost: <span id="mainframe-cost">3200</span> BC</p>
                         </div>
                         <div class="item-count" id="mainframe-count">0</div>
+                    </div>
+
+                    <div class="upgrade-item" id="upgrade-quantum">
+                        <div class="item-details">
+                            <h4>AI_Darknet_Hivemind.net</h4>
+                            <p>+350.0 BC/s // Cost: <span id="quantum-cost">45000</span> BC</p>
+                        </div>
+                        <div class="item-count" id="quantum-count-item">0</div>
                     </div>
                 </div>
             </div>
 
             <div class="module-section">
-                <div class="section-title">// REALIZĂRI DEBLOCATE</div>
+                <div class="section-title">// DECRYPTED ACHIEVEMENTS INDEX</div>
                 <div class="achievements-grid">
-                    <div class="ach-card locked" id="ach-1" title="Dă primul tău click manual">
-                        <div class="ach-icon">🖱️</div>
-                        <div class="ach-name">Primul Hack</div>
-                    </div>
-                    <div class="ach-card locked" id="ach-2" title="Cumpără 10 Boți">
-                        <div class="ach-icon">🤖</div>
-                        <div class="ach-name">Armata Bot</div>
-                    </div>
-                    <div class="ach-card locked" id="ach-3" title="Prinde o anomalie de rețea">
-                        <div class="ach-icon">⚡</div>
-                        <div class="ach-name">Vânător Node</div>
-                    </div>
-                    <div class="ach-card locked" id="ach-4" title="Efectuează primul tău Prestigiu">
-                        <div class="ach-icon">🌀</div>
-                        <div class="ach-name">Evoluție</div>
-                    </div>
+                    <div class="ach-card locked" id="ach-firstClick" title="Mine 1 ByteCoin manually"><div class="ach-icon">🖱️</div></div>
+                    <div class="ach-card locked" id="ach-hundredClicks" title="Click the core 100 times"><div class="ach-icon">⚡</div></div>
+                    <div class="ach-card locked" id="ach-tenBots" title="Own 10 Infiltration Scripts"><div class="ach-icon">🤖</div></div>
+                    <div class="ach-card locked" id="ach-gpuArmy" title="Own 5 Plutonium GPU Rigs"><div class="ach-icon">☢️</div></div>
+                    <div class="ach-card locked" id="ach-rich" title="Accumulate 10,000 ByteCoins"><div class="ach-icon">💰</div></div>
+                    <div class="ach-card locked" id="ach-anomalyRed" title="Catch a Red Overclock Anomaly"><div class="ach-icon">🔴</div></div>
+                    <div class="ach-card locked" id="ach-anomalyBlue" title="Catch a Blue Glitch Anomaly"><div class="ach-icon">🔵</div></div>
+                    <div class="ach-card locked" id="ach-anomalyGold" title="Catch a Gold Fortune Anomaly"><div class="ach-icon">🟡</div></div>
+                    <div class="ach-card locked" id="ach-firstPrestige" title="Trigger a Quantum Singularity Reboot"><div class="ach-icon">🌀</div></div>
                 </div>
             </div>
 
-            <button id="resetBtn">ȘTERGERE TOTALĂ BAZĂ DATE</button>
+            <button id="resetBtn">WIPE ALL LOCAL ARCHIVES (RESET)</button>
         </div>
 
     </div>
