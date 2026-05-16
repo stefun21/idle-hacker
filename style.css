@@ -9,7 +9,7 @@
 }
 
 body {
-    background-color: #030708;
+    background-color: #020506;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -18,59 +18,108 @@ body {
     color: #00ffaa;
 }
 
-/* Efect vizual de alertă/boost roșu pe tot ecranul */
-#boost-overlay {
+/* Dynamic full screen FX overlays for active Boosts */
+#fx-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, rgba(255, 0, 85, 0.15) 0%, transparent 80%);
     z-index: 0;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.5s ease, background 0.5s ease;
 }
 
-body.boost-active #boost-overlay {
+body.boost-red #fx-overlay {
     opacity: 1;
-    animation: pulse-bg 1s infinite alternate;
+    background: radial-gradient(circle, rgba(255, 0, 85, 0.2) 0%, transparent 80%);
+    animation: pulse-red-fx 0.8s infinite alternate;
 }
 
-@keyframes pulse-bg {
-    from { opacity: 0.4; }
-    to { opacity: 1; }
+body.boost-blue #fx-overlay {
+    opacity: 1;
+    background: radial-gradient(circle, rgba(0, 170, 255, 0.2) 0%, transparent 80%);
+    animation: pulse-blue-fx 0.1s infinite alternate, glitch-shaking 0.15s infinite;
 }
 
-/* Container Terminal Principal */
+body.flash-gold #fx-overlay {
+    opacity: 1;
+    background: #ffcc00;
+    transition: none;
+}
+
+@keyframes pulse-red-fx { from { opacity: 0.3; } to { opacity: 1; } }
+@keyframes pulse-blue-fx { from { opacity: 0.4; } to { opacity: 1; } }
+@keyframes glitch-shaking {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    100% { transform: translate(-1px, -1px) rotate(0.5deg); }
+}
+
+/* Achievement Pop-up sliding from top */
+#ach-notification {
+    position: fixed;
+    top: 20px;
+    background: rgba(5, 15, 12, 0.95);
+    border: 2px solid #00ffaa;
+    box-shadow: 0 0 25px rgba(0,255,170,0.6);
+    padding: 15px 25px;
+    display: flex;
+    flex-direction: column;
+    width: 380px;
+    z-index: 9999;
+    border-radius: 4px;
+    animation: slideDown 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+#ach-notification.hidden { display: none; }
+
+.ach-pop-header {
+    font-size: 11px;
+    color: #00aaff;
+    border-bottom: 1px solid rgba(0, 255, 170, 0.2);
+    padding-bottom: 4px;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.ach-pop-body {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#ach-pop-icon { font-size: 26px; }
+#ach-pop-title { color: #fff; font-size: 15px; }
+#ach-pop-desc { color: #888; font-size: 12px; }
+
+@keyframes slideDown {
+    0% { transform: translateY(-150px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Master Terminal Shell */
 .cyber-terminal {
     position: relative;
     z-index: 2;
     display: flex;
-    width: 950px;
-    height: 620px;
-    background: rgba(6, 12, 14, 0.95);
+    width: 980px;
+    height: 640px;
+    background: rgba(4, 8, 10, 0.97);
     border: 2px solid #00ffaa;
-    box-shadow: 0 0 30px rgba(0, 255, 170, 0.2), inset 0 0 15px rgba(0, 255, 170, 0.1);
-    border-radius: 4px;
+    box-shadow: 0 0 35px rgba(0, 255, 170, 0.25);
 }
 
-/* Partea Stângă */
 .main-core {
     flex: 1.2;
     padding: 25px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-right: 1px solid rgba(0, 255, 170, 0.3);
+    border-right: 1px solid rgba(0, 255, 170, 0.2);
 }
 
-.terminal-header {
-    font-size: 13px;
-    color: #00aaff;
-    letter-spacing: 1px;
-}
-
+.terminal-header { font-size: 12px; color: #00aaff; }
 .status-dot {
     display: inline-block;
     width: 8px;
@@ -79,211 +128,109 @@ body.boost-active #boost-overlay {
     border-radius: 50%;
     box-shadow: 0 0 8px #00ffaa;
     margin-right: 5px;
-    animation: blink 0.8s infinite alternate;
 }
 
 .stats-panel {
     text-align: center;
-    background: rgba(0, 255, 170, 0.03);
-    padding: 15px;
-    border: 1px dashed rgba(0, 255, 170, 0.3);
+    background: rgba(0, 255, 170, 0.02);
+    padding: 18px;
+    border: 1px dashed rgba(0, 255, 170, 0.25);
 }
 
-.crypto-title {
-    font-size: 12px;
-    color: #888;
-    letter-spacing: 2px;
-}
+.crypto-title { font-size: 11px; color: #666; letter-spacing: 2px; }
+.balance-box { font-size: 58px; color: #00ffaa; text-shadow: 0 0 15px rgba(0, 255, 170, 0.4); font-weight: bold; }
+.ticker { font-size: 22px; color: #00aaff; }
+#cps-display { font-size: 15px; color: #00aaff; }
 
-.balance-box {
-    font-size: 55px;
-    color: #00ffaa;
-    text-shadow: 0 0 15px rgba(0, 255, 170, 0.5);
-    font-weight: bold;
-}
-
-.ticker {
-    font-size: 24px;
-    color: #00aaff;
-}
-
-#cps-display {
-    font-size: 15px;
-    color: #00aaff;
-}
-
-/* Nodul Central Zburător/Clickabil */
+/* The Spinning Pulsing Core Node */
 .cyber-server {
-    width: 220px;
-    height: 220px;
-    background: #061012;
-    border: 3px solid #00ffaa;
+    width: 210px;
+    height: 210px;
+    background: #040d0f;
+    border: 2px dashed #00ffaa;
     border-radius: 50%;
-    margin: 20px auto;
+    margin: 15px auto;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     position: relative;
-    box-shadow: 0 0 20px rgba(0, 255, 170, 0.2);
-    transition: transform 0.05s, box-shadow 0.2s;
+    transition: transform 0.05s;
+    animation: slow-spin 20s linear infinite;
 }
 
-.cyber-server:hover {
-    box-shadow: 0 0 35px rgba(0, 255, 170, 0.5);
-}
+.cyber-server:active { transform: scale(0.94); }
 
-.cyber-server:active {
-    transform: scale(0.95);
+.glow-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: #00ffaa;
+    border-bottom-color: #00ffaa;
+    animation: fast-spin 3s linear infinite;
 }
 
 .server-text {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: bold;
     text-align: center;
     width: 70%;
-    color: #00ffaa;
-    z-index: 5;
+    color: #fff;
+    text-shadow: 0 0 8px #00ffaa;
+    animation: counter-spin 20s linear infinite; /* Keeps text straight while core spins */
 }
 
-/* Panelul de Prestigiu */
+@keyframes slow-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes fast-spin { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+@keyframes counter-spin { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+
+/* Prestige Base Layout */
 .prestige-panel {
-    background: rgba(0, 170, 255, 0.05);
-    border: 1px solid rgba(0, 170, 255, 0.3);
-    padding: 12px;
+    background: rgba(0, 170, 255, 0.04);
+    border: 1px solid rgba(0, 170, 255, 0.2);
+    padding: 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.prestige-title {
-    font-size: 12px;
-    color: #00aaff;
-}
+.prestige-title { font-size: 11px; color: #00aaff; }
+.prestige-info { font-size: 13px; color: #fff; }
+#prestigeBtn { background: #00aaff; border: none; color: #000; padding: 10px 14px; font-weight: bold; cursor: pointer; }
+#prestigeBtn.locked { background: #161e20; color: #445558; cursor: not-allowed; border: 1px solid #253336; }
+#prestigeBtn:not(.locked):hover { background: #00e1ff; box-shadow: 0 0 12px #00aaff; }
 
-.prestige-info {
-    font-size: 13px;
-    color: #fff;
-}
-
-#prestigeBtn {
-    background: #00aaff;
-    border: none;
-    color: #000;
-    padding: 8px 12px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-#prestigeBtn.locked {
-    background: #222;
-    color: #666;
-    cursor: not-allowed;
-    border: 1px solid #333;
-}
-
-#prestigeBtn:not(.locked):hover {
-    background: #00e1ff;
-    box-shadow: 0 0 10px #00aaff;
-}
-
-/* Partea Dreaptă */
-.side-modules {
-    flex: 1;
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.module-section {
-    margin-bottom: 20px;
-}
-
-.section-title {
-    font-size: 13px;
-    color: #666;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
-}
-
-.shop-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
+/* Right Panel Upgrades Shop */
+.side-modules { flex: 1; padding: 25px; display: flex; flex-direction: column; justify-content: space-between; }
+.module-section { margin-bottom: 15px; }
+.section-title { font-size: 12px; color: #555; margin-bottom: 8px; letter-spacing: 1px; }
+.shop-list { display: flex; flex-direction: column; gap: 8px; }
 
 .upgrade-item {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(0, 255, 170, 0.2);
-    padding: 12px;
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(0, 255, 170, 0.15);
+    padding: 10px 14px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    transition: all 0.2s;
 }
 
-.upgrade-item:hover {
-    background: rgba(0, 255, 170, 0.08);
-    border-color: #00ffaa;
-}
+.upgrade-item:hover { background: rgba(0, 255, 170, 0.06); border-color: #00ffaa; }
+.upgrade-item h4 { font-size: 14px; color: #fff; }
+.upgrade-item p { font-size: 11px; color: #666; }
+.item-count { font-size: 22px; color: rgba(0, 255, 170, 0.15); font-weight: bold; }
+.upgrade-item:hover .item-count { color: #00ffaa; }
 
-.upgrade-item h4 {
-    font-size: 14px;
-    color: #fff;
-}
+/* Grid of mini trophys */
+.achievements-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.ach-card { background: #04090b; border: 1px solid rgba(0, 255, 170, 0.2); padding: 10px; text-align: center; border-radius: 2px; }
+.ach-card.locked { opacity: 0.15; filter: grayscale(1); border-color: #222; }
+.ach-icon { font-size: 18px; }
 
-.upgrade-item p {
-    font-size: 11px;
-    color: #888;
-}
-
-.item-count {
-    font-size: 22px;
-    color: rgba(0, 255, 170, 0.2);
-    font-weight: bold;
-}
-
-.upgrade-item:hover .item-count {
-    color: #00ffaa;
-}
-
-/* Grid Realizări */
-.achievements-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-}
-
-.ach-card {
-    background: #091316;
-    border: 1px solid rgba(0, 255, 170, 0.4);
-    padding: 8px;
-    text-align: center;
-    border-radius: 4px;
-    opacity: 1;
-    transition: all 0.3s;
-}
-
-.ach-card.locked {
-    opacity: 0.25;
-    border-color: #333;
-    filter: grayscale(1);
-}
-
-.ach-icon {
-    font-size: 20px;
-    margin-bottom: 3px;
-}
-
-.ach-name {
-    font-size: 10px;
-    color: #fff;
-}
-
-/* Numerele Zburătoare la click */
+/* Floating particle numbers script engine */
 .floating-number {
     position: absolute;
     pointer-events: none;
@@ -294,57 +241,30 @@ body.boost-active #boost-overlay {
     animation: floatUp 0.6s ease-out forwards;
     z-index: 100;
 }
-
-.floating-number.critic {
-    color: #ff0055;
-    text-shadow: 0 0 10px #ff0055;
-    font-size: 24px;
-}
+.floating-number.critic { color: #ff0055; text-shadow: 0 0 10px #ff0055; font-size: 25px; font-style: italic; }
+.floating-number.glitch-float { color: #00aaff; text-shadow: 0 0 10px #00aaff; font-size: 21px; }
 
 @keyframes floatUp {
     0% { transform: translateY(0) scale(1); opacity: 1; }
-    100% { transform: translateY(-80px) scale(0.8); opacity: 0; }
+    100% { transform: translateY(-90px) scale(0.7); opacity: 0; }
 }
 
-/* Butonul de Anomalie Aleatorie (Node-ul Zburător) */
+/* Master Anomaly Node Object (Multi-colors handled in JS) */
 #anomaly-node {
     position: fixed;
-    width: 45px;
-    height: 45px;
-    background: #ff0055;
+    width: 50px;
+    height: 50px;
     border: 3px solid #fff;
     border-radius: 50%;
     cursor: pointer;
-    box-shadow: 0 0 25px #ff0055;
     z-index: 1000;
-    animation: pulse-node 0.5s infinite alternate;
+    animation: pulse-node-glow 0.4s infinite alternate;
+}
+#anomaly-node.hidden { display: none; }
+@keyframes pulse-node-glow {
+    from { transform: scale(0.95); }
+    to { transform: scale(1.1); box-shadow: 0 0 30px inherit, 0 0 10px #fff; }
 }
 
-#anomaly-node.hidden {
-    display: none;
-}
-
-@keyframes pulse-node {
-    from { transform: scale(1); box-shadow: 0 0 15px #ff0055; }
-    to { transform: scale(1.15); box-shadow: 0 0 30px #ff0055, 0 0 10px #fff; }
-}
-
-#resetBtn {
-    background: transparent;
-    border: 1px solid #ff0055;
-    color: #ff0055;
-    padding: 8px;
-    cursor: pointer;
-    font-size: 11px;
-    transition: all 0.2s;
-}
-
-#resetBtn:hover {
-    background: #ff0055;
-    color: #fff;
-}
-
-@keyframes blink {
-    from { opacity: 0.3; }
-    to { opacity: 1; }
-}
+#resetBtn { background: transparent; border: 1px solid #ff0055; color: #ff0055; padding: 8px; cursor: pointer; font-size: 11px; }
+#resetBtn:hover { background: #ff0055; color: #fff; }
