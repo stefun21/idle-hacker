@@ -64,51 +64,69 @@
                 
                 <div class="shop-list">
                     <div class="upgrade-item" id="upgrade-click">
-                        <div class="up-meta">
-                            <span class="up-name">💉 Syringe Injector</span>
-                            <span class="up-count">Count: <span id="click-count">0</span></span>
+                        <div class="up-container-main">
+                            <div class="up-meta">
+                                <span class="up-name">💉 Syringe Injector</span>
+                                <span class="up-count">Count: <span id="click-count">0</span></span>
+                            </div>
+                            <button class="buy-btn">BUY // <span id="click-cost">50</span> BC</button>
                         </div>
-                        <button class="buy-btn">BUY // <span id="click-cost">50</span> BC</button>
+                        <div class="upgrade-progress-bg"><div id="progress-bar-click" class="upgrade-progress-fill manual-fill"></div></div>
                     </div>
 
                     <div class="upgrade-item" id="upgrade-bot">
-                        <div class="up-meta">
-                            <span class="up-name">🤖 Infiltration Script</span>
-                            <span class="up-count">Count: <span id="bot-count">0</span></span>
+                        <div class="up-container-main">
+                            <div class="up-meta">
+                                <span class="up-name">🤖 Infiltration Script</span>
+                                <span class="up-count">Count: <span id="bot-count">0</span></span>
+                            </div>
+                            <button class="buy-btn">BUY // <span id="bot-cost">20</span> BC</button>
                         </div>
-                        <button class="buy-btn">BUY // <span id="bot-cost">20</span> BC</button>
+                        <div class="upgrade-progress-bg"><div id="progress-bar-bot" class="upgrade-progress-fill"></div></div>
                     </div>
 
                     <div class="upgrade-item" id="upgrade-gpu">
-                        <div class="up-meta">
-                            <span class="up-name">☢️ Plutonium GPU Rig</span>
-                            <span class="up-count">Count: <span id="gpu-count">0</span></span>
+                        <div class="up-container-main">
+                            <div class="up-meta">
+                                <span class="up-name">☢️ Plutonium GPU Rig</span>
+                                <span class="up-count">Count: <span id="gpu-count">0</span></span>
+                            </div>
+                            <button class="buy-btn">BUY // <span id="gpu-cost">250</span> BC</button>
                         </div>
-                        <button class="buy-btn">BUY // <span id="gpu-cost">250</span> BC</button>
+                        <div class="upgrade-progress-bg"><div id="progress-bar-gpu" class="upgrade-progress-fill"></div></div>
                     </div>
 
                     <div class="upgrade-item" id="upgrade-mainframe">
-                        <div class="up-meta">
-                            <span class="up-name">📡 Orbital Hijack</span>
-                            <span class="up-count">Count: <span id="mainframe-count">0</span></span>
+                        <div class="up-container-main">
+                            <div class="up-meta">
+                                <span class="up-name">📡 Orbital Hijack</span>
+                                <span class="up-count">Count: <span id="mainframe-count">0</span></span>
+                            </div>
+                            <button class="buy-btn">BUY // <span id="mainframe-cost">3200</span> BC</button>
                         </div>
-                        <button class="buy-btn">BUY // <span id="mainframe-cost">3200</span> BC</button>
+                        <div class="upgrade-progress-bg"><div id="progress-bar-mainframe" class="upgrade-progress-fill"></div></div>
                     </div>
 
                     <div class="upgrade-item" id="upgrade-quantum">
-                        <div class="up-meta">
-                            <span class="up-name">🧠 Darknet Hivemind</span>
-                            <span class="up-count">Count: <span id="quantum-count-item">0</span></span>
+                        <div class="up-container-main">
+                            <div class="up-meta">
+                                <span class="up-name">🧠 Darknet Hivemind</span>
+                                <span class="up-count">Count: <span id="quantum-count-item">0</span></span>
+                            </div>
+                            <button class="buy-btn">BUY // <span id="quantum-cost">45000</span> BC</button>
                         </div>
-                        <button class="buy-btn">BUY // <span id="quantum-cost">45000</span> BC</button>
+                        <div class="upgrade-progress-bg"><div id="progress-bar-quantum" class="upgrade-progress-fill"></div></div>
                     </div>
 
                     <div class="upgrade-item" id="upgrade-dyson">
-                        <div class="up-meta">
-                            <span class="up-name">🌌 Dyson Data Cluster</span>
-                            <span class="up-count">Count: <span id="dyson-count">0</span></span>
+                        <div class="up-container-main">
+                            <div class="up-meta">
+                                <span class="up-name">🌌 Dyson Data Cluster</span>
+                                <span class="up-count">Count: <span id="dyson-count">0</span></span>
+                            </div>
+                            <button class="buy-btn">BUY // <span id="dyson-cost">950000</span> BC</button>
                         </div>
-                        <button class="buy-btn">BUY // <span id="dyson-cost">950000</span> BC</button>
+                        <div class="upgrade-progress-bg"><div id="progress-bar-dyson" class="upgrade-progress-fill"></div></div>
                     </div>
                 </div>
 
@@ -141,7 +159,7 @@
                 <div class="ach-card locked" id="ach-anomalyGold"><span class="ach-icon">🟡</span><div class="ach-txt"><strong>Jackpot Inbound</strong><p>Catch Gold Anomaly</p></div></div>
                 <div class="ach-card locked" id="ach-firstOverheat"><span class="ach-icon">🔥</span><div class="ach-txt"><strong>Meltdown Warning</strong><p>Trigger 1 Overheat</p></div></div>
                 <div class="ach-card locked" id="ach-survival"><span class="ach-icon">🛡️</span><div class="ach-txt"><strong>System Engineer</strong><p>Recover 3 times</p></div></div>
-                <div class="ach-card locked" id="ach-firstPrestige"><span class="ach-icon">🌀</strong><div class="ach-txt"><strong>Transcended</strong><p>Reboot Core 1x</p></div></div>
+                <div class="ach-card locked" id="ach-firstPrestige"><span class="ach-icon">🌀</span><div class="ach-txt"><strong>Transcended</strong><p>Reboot Core 1x</p></div></div>
             </div>
 
             <div class="control-row">
