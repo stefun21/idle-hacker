@@ -3,183 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyberNet OS v9.5 // Core Dashboard</title>
+    <title>CyberNet v9.6 // Micro-Console</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="overheat-risky">
+<body>
     <div class="crt-overlay"></div>
     <div class="scanline"></div>
-    <div class="matrix-bg" id="matrix-bg"></div>
 
-    <div id="glitch-popup" class="system-popup hidden">
-        <div class="popup-header">⚠️ THERMAL_CRITICAL</div>
-        <div class="popup-body">
-            <p id="popup-text">CORE_STABILITY_AT_RISK.</p>
-            <button id="close-popup-btn" class="buy-btn">ACKNOWLEDGE</button>
-        </div>
-    </div>
-
-    <div class="terminal-mainframe">
-        <header class="system-header">
-            <div class="sys-title"><span class="blink">▲</span> CYBERNET_v9.5</div>
+    <div class="micro-terminal">
+        <header class="mini-header">
+            <div class="sys-title">● CYBERNET_v9.6</div>
             <div id="event-ticker" class="sys-ticker">// STATUS: NOMINAL</div>
-            <div class="sys-status-tags">
-                <span class="tag">SEC: MAX</span>
-                <span class="tag tag-blue">NET: ENCRYPTED</span>
-            </div>
+            <button id="resetBtn" class="wipe-btn">WIPE</button>
         </header>
 
-        <div class="dashboard-layout">
+        <div class="main-dashboard">
             
-            <aside class="panel stats-panel">
-                <div class="panel-header">// NETWORK_LEDGER</div>
-                <div class="balance-display">
-                    <span id="balance">0</span> BC
-                </div>
-                <div class="rate-info">
-                    <div id="cps-display">GENERATION: 0.0 BC/s</div>
-                    <div id="cpc-display">CLICK_VAL: 1.0 BC</div>
-                </div>
-
-                <div class="fake-matrix-controls">
-                    <div class="fake-header">// SUB_SYSTEMS</div>
-                    <div class="fake-btn-grid">
+            <div class="sub-panel stats-panel">
+                <div class="panel-title">// LEDGER</div>
+                <div class="balance-box"><span id="balance">0</span> <span class="unit">BC</span></div>
+                <div id="cps-display">GEN: 0.0 BC/s</div>
+                <div id="cpc-display">CLK: 1.0 BC</div>
+                
+                <div class="fake-system-box">
+                    <div class="fake-grid">
                         <button class="fk-btn" id="fake-flush">FLUSH</button>
                         <button class="fk-btn" id="fake-bypass">BYPASS</button>
-                        <button class="fk-btn" id="fake-overclock">OC</button>
+                        <button class="fk-btn" id="fake-overclock">OVERC</button>
                         <button class="fk-btn" id="fake-proxy">PROXY</button>
                     </div>
-                    <div id="fake-log-output">// STANDBY...</div>
+                    <div id="fake-log-output">> READY</div>
                 </div>
-            </aside>
+            </div>
 
-            <main class="panel core-panel core-overheated-visuals">
-                <div class="panel-header">// QUANTUM_NUCLEUS</div>
+            <div class="sub-panel core-panel">
+                <div class="panel-title">// QUANTUM_NODE</div>
                 
-                <div class="core-thermo-wrapper">
-                    <div class="heat-gauge-vertical">
-                        <div class="heat-bar-segmented">
-                            <div id="heat-fill" class="heat-fill"></div>
-                            <div class="segments">
-                                <div></div><div></div><div></div><div></div><div></div>
-                                <div></div><div></div><div></div><div></div><div></div>
-                            </div>
-                        </div>
-                        <div class="heat-text"><span id="temp-display">0</span>°C</div>
+                <div class="core-area">
+                    <div id="clickBox" class="mini-core">
+                        <div class="spin-ring"></div>
+                        <span id="core-text">EXTRACT</span>
                     </div>
 
-                    <div class="core-interaction-zone">
-                        <div id="clickBox" class="quantum-core-node">
-                            <div class="core-scanner"></div>
-                            <div class="core-spin-ring"></div>
-                            <span id="core-text">EXTRACT</span>
+                    <div class="horizontal-heat-fluid">
+                        <div class="heat-meta">TEMP: <span id="temp-display">0</span>°C</div>
+                        <div class="bar-border">
+                            <div id="heat-fill" class="bar-fill"></div>
                         </div>
                     </div>
                 </div>
-            </main>
+            </div>
 
-            <section class="panel shop-panel">
-                <div class="panel-header">// INFRASTRUCTURE_MARKET</div>
-                <div class="shop-grid">
-                    <div class="upgrade-item" id="upgrade-click">
-                        <div class="up-meta">
-                            <span class="up-name">💉 Syringe [<span id="click-count">0</span>]</span>
-                            <span class="up-desc">+1 BC/Cl</span>
-                        </div>
-                        <button class="buy-btn"><span id="click-cost">50</span> BC</button>
-                    </div>
-
-                    <div class="upgrade-item" id="upgrade-bot">
-                        <div class="up-meta">
-                            <span class="up-name">🤖 Botnet [<span id="bot-count">0</span>]</span>
-                            <span class="up-desc">+0.2 BC/s</span>
-                        </div>
-                        <button class="buy-btn"><span id="bot-cost">20</span> BC</button>
-                    </div>
-
-                    <div class="upgrade-item" id="upgrade-gpu">
-                        <div class="up-meta">
-                            <span class="up-name">☢️ GPU Rig [<span id="gpu-count">0</span>]</span>
-                            <span class="up-desc">+3.5 BC/s</span>
-                        </div>
-                        <button class="buy-btn"><span id="gpu-cost">250</span> BC</button>
-                    </div>
-
-                    <div class="upgrade-item" id="upgrade-mainframe">
-                        <div class="up-meta">
-                            <span class="up-name">📡 Hijack [<span id="mainframe-count">0</span>]</span>
-                            <span class="up-desc">+40 BC/s</span>
-                        </div>
-                        <button class="buy-btn"><span id="mainframe-cost">3200</span> BC</button>
-                    </div>
-
-                    <div class="upgrade-item" id="upgrade-quantum">
-                        <div class="up-meta">
-                            <span class="up-name">🧠 Hivemind [<span id="quantum-count-item">0</span>]</span>
-                            <span class="up-desc">+350 BC/s</span>
-                        </div>
-                        <button class="buy-btn"><span id="quantum-cost">45000</span> BC</button>
-                    </div>
-
-                    <div class="upgrade-item" id="upgrade-dyson">
-                        <div class="up-meta">
-                            <span class="up-name">🌌 Dyson [<span id="dyson-count">0</span>]</span>
-                            <span class="up-desc">+4.2k BC/s</span>
-                        </div>
-                        <button class="buy-btn"><span id="dyson-cost">950000</span> BC</button>
-                    </div>
+            <div class="sub-panel prestige-panel">
+                <div class="panel-title">// REBOOT_ZONE</div>
+                <div class="prestige-stats">
+                    <div>CHIPS: <span id="quantum-count">0</span></div>
+                    <div>MULT: <span id="prestige-multiplier">1.0</span>x</div>
                 </div>
+                <button id="prestigeBtn" class="prestige-btn locked">REBOOT CORE</button>
+            </div>
 
-                <div class="prestige-zone">
-                    <div class="prestige-info">
-                        <span>CHIPS: <span id="quantum-count">0</span></span>
-                        <span>MULT: <span id="prestige-multiplier">1.0</span>x</span>
-                    </div>
-                    <button id="prestigeBtn" class="prestige-btn locked">REBOOT CORE</button>
-                </div>
-            </section>
         </div>
 
-        <footer class="system-footer">
-            <div class="footer-meta">
-                <div class="panel-header-sub">// DECRYPTED_MILESTONES</div>
-                <button id="masteryBtn" class="mastery-btn hidden mastery-flash">▲ ACTIVATE MASTERY PROTOCOL ▲</button>
+        <div class="market-strip">
+            <div class="upgrade-node" id="upgrade-click">
+                <span class="up-info">💉 Injector (<span id="click-count">0</span>)</span>
+                <button class="buy-btn"><span id="click-cost">50</span> BC</button>
             </div>
-            
-            <div class="achievements-hex-grid">
-                <div class="ach-hex locked" id="ach-firstClick" title="First Injection">🖱️</div>
-                <div class="ach-hex locked" id="ach-hundredClicks" title="15 clicks">⚡</div>
-                <div class="ach-hex locked" id="ach-thousandClicks" title="50 clicks">🖲️</div>
-                <div class="ach-hex locked" id="ach-tenBots" title="3 scripts">🤖</div>
-                <div class="ach-hex locked" id="ach-gpuArmy" title="2 GPU Rigs">☢️</div>
-                <div class="ach-hex locked" id="ach-clickMaster" title="5 upgrades">💉</div>
-                <div class="ach-hex locked" id="ach-dysonCore" title="1 Dyson Cluster">🌌</div>
-                <div class="ach-hex locked" id="ach-rich" title="500 BC held">💰</div>
-                <div class="ach-hex locked" id="ach-millionaire" title="25k BC held">💎</div>
-                <div class="ach-hex locked" id="ach-anomalyRed" title="Caught Red">🔴</div>
-                <div class="ach-hex locked" id="ach-anomalyBlue" title="Caught Blue">🔵</div>
-                <div class="ach-hex locked" id="ach-anomalyGold" title="Caught Gold">🟡</div>
-                <div class="ach-hex locked" id="ach-firstOverheat" title="Meltdown">🔥</div>
-                <div class="ach-hex locked" id="ach-survival" title="3 recoveries">🛡️</div>
-                <div class="ach-hex locked" id="ach-firstPrestige" title="Reboot">🌀</div>
-                <div class="ach-hex locked" id="ach-buttonSpam" title="Spammed sub-systems">🕹️</div>
+            <div class="upgrade-node" id="upgrade-bot">
+                <span class="up-info">🤖 Botnet (<span id="bot-count">0</span>)</span>
+                <button class="buy-btn"><span id="bot-cost">20</span> BC</button>
             </div>
+            <div class="upgrade-node" id="upgrade-gpu">
+                <span class="up-info">☢️ GPU Rig (<span id="gpu-count">0</span>)</span>
+                <button class="buy-btn"><span id="gpu-cost">250</span> BC</button>
+            </div>
+            <div class="upgrade-node" id="upgrade-mainframe">
+                <span class="up-info">📡 Hijack (<span id="mainframe-count">0</span>)</span>
+                <button class="buy-btn"><span id="mainframe-cost">3200</span> BC</button>
+            </div>
+            <div class="upgrade-node" id="upgrade-quantum">
+                <span class="up-info">🧠 Hivemind (<span id="quantum-count-item">0</span>)</span>
+                <button class="buy-btn"><span id="quantum-cost">45000</span> BC</button>
+            </div>
+            <div class="upgrade-node" id="upgrade-dyson">
+                <span class="up-info">🌌 Dyson (<span id="dyson-count">0</span>)</span>
+                <button class="buy-btn"><span id="dyson-cost">950000</span> BC</button>
+            </div>
+        </div>
 
-            <button id="resetBtn" class="wipe-btn">WIPE_CACHE</button>
+        <footer class="mini-footer">
+            <div class="footer-left">
+                <span>// MILESTONES:</span>
+                <button id="masteryBtn" class="mastery-btn hidden">▲ MASTERY</button>
+            </div>
+            <div class="ach-dots-container">
+                <div class="dot locked" id="ach-firstClick" title="First Injection"></div>
+                <div class="dot locked" id="ach-hundredClicks" title="15 clicks"></div>
+                <div class="dot locked" id="ach-thousandClicks" title="50 clicks"></div>
+                <div class="dot locked" id="ach-tenBots" title="3 scripts"></div>
+                <div class="dot locked" id="ach-gpuArmy" title="2 GPU Rigs"></div>
+                <div class="dot locked" id="ach-clickMaster" title="5 upgrades"></div>
+                <div class="dot locked" id="ach-dysonCore" title="1 Dyson Cluster"></div>
+                <div class="dot locked" id="ach-rich" title="500 BC held"></div>
+                <div class="dot locked" id="ach-millionaire" title="25k BC held"></div>
+                <div class="dot locked" id="ach-anomalyRed" title="Red Core"></div>
+                <div class="dot locked" id="ach-anomalyBlue" title="Blue Glitch"></div>
+                <div class="dot locked" id="ach-anomalyGold" title="Gold Jackpot"></div>
+                <div class="dot locked" id="ach-firstOverheat" title="Meltdown"></div>
+                <div class="dot locked" id="ach-survival" title="3 recoveries"></div>
+                <div class="dot locked" id="ach-firstPrestige" title="Reboot"></div>
+                <div class="dot locked" id="ach-buttonSpam" title="Spam logs"></div>
+            </div>
         </footer>
     </div>
 
-    <div id="ach-notification" class="achievement-toast hidden">
-        <div class="toast-content">
-            <span id="ach-pop-icon" class="toast-icon">🏆</span>
-            <div>
-                <div id="ach-pop-title" class="toast-title">Unlocked</div>
-                <p id="ach-pop-desc" class="toast-desc">Desc</p>
-            </div>
-        </div>
+    <div id="ach-notification" class="toast hidden">
+        <span id="ach-pop-icon">🏆</span> <span id="ach-pop-title" style="font-weight:bold;"></span>
     </div>
 
-    <div id="anomaly-node" class="volatile-anomaly hidden"></div>
+    <div id="glitch-popup" class="micro-popup hidden">⚠️ THERMAL_OVERLOAD <button id="close-popup-btn">X</button></div>
+    <div id="anomaly-node" class="anomaly hidden"></div>
 
     <script src="script.js"></script>
 </body>
