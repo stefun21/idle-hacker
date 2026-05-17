@@ -10,11 +10,20 @@
     <div class="crt-overlay"></div>
     <div class="scanline"></div>
 
+    <div id="glitch-popup" class="system-popup hidden">
+        <div class="popup-header">⚠️ CRITICAL_CORE_WARNING</div>
+        <div class="popup-body">
+            <p id="popup-text">SYSTEM_GLITCH: BUFFER_OVERFLOW_DETECTED.</p>
+            <button id="close-popup-btn" class="buy-btn">DISMISS</button>
+        </div>
+    </div>
+
     <div class="terminal-container">
         <header class="terminal-header">
             <div class="terminal-title">
-                <span class="blink-fast">▲</span> CORE_SYSTEM_v9.2 // ACCESS_GRANTED
+                <span class="blink-fast">▲</span> CORE_SYSTEM_v9.3 // ACCESS_GRANTED
             </div>
+            <div id="event-ticker" class="ticker-text">// SYSTEM_STATUS: RUNNING_OPTIMAL</div>
             <div class="system-status">
                 <span class="status-tag">CPU_LOAD: OPTIMAL</span>
                 <span class="status-tag security-tag">SEC_LEVEL: MAXIMUM</span>
@@ -24,7 +33,7 @@
         <main class="mainframe-grid">
             
             <section class="grid-panel center-panel">
-                <div class="panel-header">// CENTRAL_QUANTUM_CORE</div>
+                <div class="panel-header">// CENTRAL_QUANTUM_CORE & SECURITY_ARRAY</div>
                 
                 <div class="stats-counter">
                     <div class="stat-box">
@@ -55,7 +64,19 @@
 
                 <div class="rate-displays">
                     <div id="cps-display">// NET_GENERATION: 0.0 BC/s</div>
+                    <div id="click-efficiency">// CLICK_STABILITY: 100%</div>
                     <div id="cpc-display">// CLICK_VALUE: 1.0 BC</div>
+                </div>
+
+                <div class="fake-control-panel">
+                    <div class="fake-panel-title">// SUB_SYSTEM_MANIPULATION_MATRIX</div>
+                    <div class="fake-buttons-grid">
+                        <button class="fake-btn" id="fake-flush">FLUSH_DNS_CACHE</button>
+                        <button class="fake-btn" id="fake-bypass">BYPASS_FIREWALL</button>
+                        <button class="fake-btn" id="fake-overclock">OVERCLOCK_VENTILATION</button>
+                        <button class="fake-btn" id="fake-proxy">ROTATE_PROXY_NODES</button>
+                    </div>
+                    <div id="fake-log-output">// IDLE_SYSTEM_STANDBY...</div>
                 </div>
             </section>
 
@@ -71,7 +92,6 @@
                             </div>
                             <button class="buy-btn">BUY // <span id="click-cost">50</span> BC</button>
                         </div>
-                        <div class="upgrade-progress-bg"><div id="progress-bar-click" class="upgrade-progress-fill manual-fill"></div></div>
                     </div>
 
                     <div class="upgrade-item" id="upgrade-bot">
@@ -82,7 +102,6 @@
                             </div>
                             <button class="buy-btn">BUY // <span id="bot-cost">20</span> BC</button>
                         </div>
-                        <div class="upgrade-progress-bg"><div id="progress-bar-bot" class="upgrade-progress-fill"></div></div>
                     </div>
 
                     <div class="upgrade-item" id="upgrade-gpu">
@@ -93,7 +112,6 @@
                             </div>
                             <button class="buy-btn">BUY // <span id="gpu-cost">250</span> BC</button>
                         </div>
-                        <div class="upgrade-progress-bg"><div id="progress-bar-gpu" class="upgrade-progress-fill"></div></div>
                     </div>
 
                     <div class="upgrade-item" id="upgrade-mainframe">
@@ -104,7 +122,6 @@
                             </div>
                             <button class="buy-btn">BUY // <span id="mainframe-cost">3200</span> BC</button>
                         </div>
-                        <div class="upgrade-progress-bg"><div id="progress-bar-mainframe" class="upgrade-progress-fill"></div></div>
                     </div>
 
                     <div class="upgrade-item" id="upgrade-quantum">
@@ -115,7 +132,6 @@
                             </div>
                             <button class="buy-btn">BUY // <span id="quantum-cost">45000</span> BC</button>
                         </div>
-                        <div class="upgrade-progress-bg"><div id="progress-bar-quantum" class="upgrade-progress-fill"></div></div>
                     </div>
 
                     <div class="upgrade-item" id="upgrade-dyson">
@@ -126,7 +142,6 @@
                             </div>
                             <button class="buy-btn">BUY // <span id="dyson-cost">950000</span> BC</button>
                         </div>
-                        <div class="upgrade-progress-bg"><div id="progress-bar-dyson" class="upgrade-progress-fill"></div></div>
                     </div>
                 </div>
 
@@ -160,6 +175,8 @@
                 <div class="ach-card locked" id="ach-firstOverheat"><span class="ach-icon">🔥</span><div class="ach-txt"><strong>Meltdown Warning</strong><p>Trigger 1 Overheat</p></div></div>
                 <div class="ach-card locked" id="ach-survival"><span class="ach-icon">🛡️</span><div class="ach-txt"><strong>System Engineer</strong><p>Recover 3 times</p></div></div>
                 <div class="ach-card locked" id="ach-firstPrestige"><span class="ach-icon">🌀</span><div class="ach-txt"><strong>Transcended</strong><p>Reboot Core 1x</p></div></div>
+                
+                <div class="ach-card locked" id="ach-buttonSpam"><span class="ach-icon">🕹️</span><div class="ach-txt"><strong>Ghost In The Shell</strong><p>Spam false Matrix controls</p></div></div>
             </div>
 
             <div class="control-row">
