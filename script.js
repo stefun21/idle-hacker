@@ -449,55 +449,64 @@ function endBoost() {
 }
 setInterval(spawnAnomaly, 38000);
 
-// EASTER EGG / COURIER CHEAT CODE SYSTEM DETECTOR
+// ============================================================================
+// CORE HACK SYSTEM (FIXED SPACE DETECTION)
+// ============================================================================
 window.addEventListener("keydown", (e) => {
-    // Adăugăm caracterele în buffer (păstrăm doar ultimele 30 de taste apăsate)
-    inputBuffer += e.key.toLowerCase();
+    // FIX: Dacă se apasă Space, browserul trimite "Process" sau "Space". Forțăm string cu spațiu gol.
+    let keyPressed = e.key.toLowerCase();
+    if (e.code === "Space" || keyPressed === "space") {
+        keyPressed = " ";
+    }
+
+    // Ignorăm tastele de control care pot strica textul (ex: Shift, Enter, Alt)
+    if (keyPressed.length > 1) return; 
+
+    inputBuffer += keyPressed;
+    
+    // Păstrăm doar ultimele 30 de caractere în buffer ca să nu consume memorie
     if (inputBuffer.length > 30) inputBuffer = inputBuffer.slice(-30);
 
-    // Verificăm dacă buffer-ul se termină cu textul cheie
+    // Verificare cod secret
     if (inputBuffer.endsWith("i am the hacker")) {
-        inputBuffer = ""; // Resetăm imediat buffer-ul
-        
-        cheatActive = !cheatActive; // Schimbăm starea cheat-ului
+        inputBuffer = ""; // Resetăm instant buffer-ul pentru runda următoare
+        cheatActive = !cheatActive; 
 
         if (cheatActive) {
-            // ACTIVARE CHEAT-MODE
+            // CODE INJECTED: ACTIVARE GOD MODE
             document.body.classList.add("hacker-mode-active");
             hackerStatusUI.textContent = "BYPASS: ON";
             hackerStatusUI.classList.add("hacker-tagged");
-            fakeLog.textContent = "// BYPASS CORE: OVERHEAT DISABLED. AUTOCLICK READY.";
+            fakeLog.textContent = "// MATRIX COMPROMISED: OVERHEAT DEACTIVATED. AUTOCLICK READY.";
             
-            // Forțăm deblocarea vizuală a tuturor realizărilor
+            // Deblocare vizuală instantanee (fără salvare pe disc ca să nu stricăm progresul legitim)
             for (let achKey in game.achievements) {
                 game.achievements[achKey] = true;
             }
             
-            // Dezactivăm complet overheat-ul curent dacă exista
+            // Resetăm forțat căldura acumulată
             game.heat = 0;
             game.isOverheated = false;
             document.body.classList.remove("core-overheated");
             coreText.textContent = "EXTRACT";
             
             updateUI();
-            console.log("Matrix Breach: Security subsystems compromised.");
         } else {
-            // DEZACTIVARE CHEAT-MODE
+            // CODE REMOVED: DEZACTIVARE MASTER HACK
             document.body.classList.remove("hacker-mode-active");
             hackerStatusUI.textContent = "SEC: MAX";
             hackerStatusUI.classList.remove("hacker-tagged");
-            fakeLog.textContent = "// SECURITY RESTORED. SYSTEM NOMINAL.";
+            fakeLog.textContent = "// ENCRYPTION RESTORED. PROTOCOLS ONLINE.";
             
             if (autoClickInterval) {
                 clearInterval(autoClickInterval);
                 autoClickInterval = null;
             }
 
-            // Reîncărcăm starea reală din salvare pentru a nu rămâne cu realizările trucate
+            // Restaurăm realizările reale din baza de date locală (localStorage)
             if (localStorage.getItem("cyberNetOS_v99_Save")) {
                 game = JSON.parse(localStorage.getItem("cyberNetOS_v99_Save"));
             } else {
-                // Dacă nu avea salvare, le resetăm pe toate pe false
                 for (let achKey in game.achievements) game.achievements[achKey] = false;
             }
             
