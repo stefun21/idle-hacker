@@ -27,27 +27,32 @@ body {
     justify-content: center;
     align-items: center;
     overflow-x: hidden;
-    padding: 30px 0; /* Mai mult spațiu pe ecrane mari */
+    padding: 30px 0;
+    transition: background-color 0.5s ease;
 }
 
-/* CRT EFFECTS */
+/* HACKER OVERRIDE MODE VIZUAL */
+body.hacker-mode-active {
+    --terminal-green: #00ffcc;
+    --panel-border: 2px dashed #00ffcc;
+    background-color: #000a06;
+}
+
 .crt-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 70%, rgba(0,0,0,0.8) 100%); pointer-events: none; z-index: 999; }
 .scanline { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%); background-size: 100% 4px; pointer-events: none; z-index: 998; }
 
-/* MAIN CONSOLE WRAPPER - TITAN DESIGN */
 .terminal-container {
     width: 95vw;
-    max-width: 1350px; /* Am mărit lățimea maximă considerabil */
+    max-width: 1350px;
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Spațiere mult mai generoasă */
+    gap: 15px;
     background: rgba(2, 10, 4, 0.96);
     border: var(--panel-border);
     padding: 20px;
     box-shadow: 0 0 35px rgba(0, 255, 102, 0.15);
 }
 
-/* HEADER STYLE */
 .sys-header {
     display: flex;
     justify-content: space-between;
@@ -59,10 +64,10 @@ body {
 .sys-ticker { font-size: 1rem; color: var(--neon-gold); font-weight: bold; }
 .header-actions { display: flex; gap: 15px; align-items: center; }
 .tag { border: 1px solid var(--terminal-green); padding: 3px 10px; font-size: 0.85rem; }
+.tag.hacker-tagged { border-color: var(--neon-blue); color: var(--neon-blue); text-shadow: 0 0 8px var(--neon-blue); animation: blink 0.3s infinite alternate; }
 .wipe-btn { background: transparent; border: 1px solid var(--neon-red); color: var(--neon-red); padding: 3px 12px; font-size: 0.85rem; cursor: pointer; font-weight: bold; }
 .wipe-btn:hover { background: var(--neon-red); color: #000; }
 
-/* MIDDLE WORKSPACE - 3 EXCELLENT COLUMNS */
 .main-workspace {
     display: grid;
     grid-template-columns: 1fr 1.3fr 1fr;
@@ -86,9 +91,8 @@ body {
     letter-spacing: 1px;
 }
 
-/* LEFT PANEL (STATS) */
 .balance-display {
-    font-size: 3.2rem; /* Mult mai mare și vizibil */
+    font-size: 3.2rem;
     font-weight: bold;
     color: #fff;
     text-shadow: 0 0 15px var(--terminal-green);
@@ -104,7 +108,6 @@ body {
 .fk-btn:hover { border-color: var(--neon-blue); color: var(--neon-blue); box-shadow: 0 0 5px var(--neon-blue); }
 #fake-log-output { font-size: 0.85rem; color: #77ff99; margin-top: 8px; padding-left: 2px; }
 
-/* CENTER PANEL (CORE & THERMAL) */
 .core-panel { align-items: center; justify-content: space-between; }
 .core-wrapper {
     display: flex;
@@ -116,13 +119,13 @@ body {
     width: 100%;
 }
 .quantum-core {
-    width: 170px; height: 170px; /* Nucleu crescut masiv */
-    border-radius: 50%;
+    width: 170px; height: 170px;
     border: 3px dashed var(--terminal-green);
     position: relative; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
     background: radial-gradient(circle, rgba(0,255,102,0.15) 0%, transparent 70%);
     transition: transform 0.05s;
+    border-radius: 50%;
 }
 .quantum-core:active { transform: scale(0.95); }
 .spin-ring {
@@ -132,13 +135,11 @@ body {
 }
 #core-text { font-size: 1.1rem; font-weight: bold; letter-spacing: 1.5px; text-shadow: 0 0 8px var(--terminal-green); }
 
-/* THERMAL GAUGE */
 .thermal-gauge-container { width: 90%; display: flex; flex-direction: column; gap: 6px; }
 .thermal-text { font-size: 0.95rem; font-weight: bold; text-align: center; }
 .thermal-bar-border { width: 100%; height: 14px; background: #011a08; border: 2px solid var(--terminal-dim); overflow: hidden; }
 .thermal-bar-fill { height: 100%; width: 0%; background: var(--terminal-green); box-shadow: 0 0 10px var(--terminal-green); transition: width 0.1s linear; }
 
-/* RIGHT PANEL (PRESTIGE) */
 .prestige-panel { justify-content: space-between; }
 .prestige-data { display: flex; flex-direction: column; gap: 10px; font-size: 1rem; }
 .data-row { display: flex; justify-content: space-between; border-bottom: 2px solid rgba(0,255,102,0.05); padding-bottom: 4px; }
@@ -147,10 +148,9 @@ body {
     width: 100%; background: transparent; border: 2px solid #333; color: #555;
     font-size: 1.05rem; font-weight: bold; padding: 12px 0; cursor: not-allowed; margin-top: auto;
 }
-.prestige-btn:not(.locked) { border-color: var(--neon-blue); color: var(--neon-blue); cursor: pointer; }
+prestige-btn:not(.locked) { border-color: var(--neon-blue); color: var(--neon-blue); cursor: pointer; }
 .prestige-btn:not(.locked):hover { background: var(--neon-blue); color: #000; box-shadow: 0 0 15px var(--neon-blue); }
 
-/* MARKET SECTION (3 COLS GRID) */
 .market-section { padding: 15px; }
 .shop-grid {
     display: grid;
@@ -164,7 +164,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 70px; /* Carduri mai înalte */
+    height: 70px;
 }
 .upgrade-card:hover:not(.disabled) { border-color: var(--terminal-green); background: rgba(0,30,10,0.5); }
 .upgrade-card.disabled { opacity: 0.25; }
@@ -179,7 +179,6 @@ body {
 .buy-btn:hover:not(:disabled) { background: var(--terminal-green); color: #000; box-shadow: 0 0 8px var(--terminal-green); }
 .upgrade-card.disabled .buy-btn { cursor: not-allowed; border-color: #444; color: #666; }
 
-/* EXPANDED & CLEAR HEXAGONAL ACHIEVEMENTS SECTION */
 .achievements-section { padding: 15px; }
 .achievements-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
 .mastery-btn { 
@@ -192,7 +191,7 @@ body {
 .hex-grid-container {
     display: grid;
     grid-template-columns: repeat(16, 1fr);
-    gap: 8px; /* Mai mult spațiu între hexagoane */
+    gap: 8px;
     background: rgba(0,0,0,0.4);
     padding: 12px;
     border: 2px solid rgba(0,255,102,0.05);
@@ -202,7 +201,7 @@ body {
     background: rgba(0,35,12,0.6);
     border: 2px solid var(--terminal-dim);
     display: flex; align-items: center; justify-content: center;
-    font-size: 1.5rem; /* Iconițe considerabil mai mari și clare! */
+    font-size: 1.5rem;
     cursor: help;
     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
     transition: all 0.3s ease;
@@ -210,7 +209,6 @@ body {
 .ach-hex.locked { filter: grayscale(100%); opacity: 0.12; border-color: #222; }
 .ach-hex:not(.locked) { border-color: var(--terminal-green); background: rgba(0,255,102,0.15); filter: drop-shadow(0 0 5px rgba(0,255,102,0.5)); }
 
-/* FLOATING SYSTEMS / SYSTEMS */
 .volatile-anomaly { position: fixed; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; z-index: 500; animation: pulse 0.8s infinite alternate; }
 .floating-number { position: fixed; pointer-events: none; font-weight: bold; font-size: 1.3rem; color: #fff; animation: float-up 0.45s ease-out forwards; z-index: 1000; }
 .floating-number.critic { color: var(--neon-gold); font-size: 1.7rem; }
@@ -225,7 +223,6 @@ body {
 .system-popup { position: fixed; top: 25px; right: 25px; background: #2d000a; border: 2px solid var(--neon-red); color: var(--neon-red); font-size: 0.95rem; padding: 10px 20px; z-index: 10005; box-shadow: 0 0 20px var(--neon-red); }
 .popup-close { background: transparent; border: 2px solid var(--neon-red); color: #fff; font-size: 0.85rem; margin-left: 12px; cursor: pointer; padding: 2px 8px; }
 
-/* SYSTEM VISUAL OVERLAYS */
 body.core-overheated .quantum-core { border-color: var(--neon-red) !important; animation: shake-core 0.1s infinite; }
 body.core-overheated .thermal-bar-fill { background: var(--neon-red) !important; box-shadow: 0 0 12px var(--neon-red); }
 body.boost-red { background-color: #120106; }
